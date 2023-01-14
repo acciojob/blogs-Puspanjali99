@@ -1,13 +1,18 @@
 package com.driver.models;
 
+
 import javax.persistence.*;
 
 @Entity
-@Table(name="images")
-public class Image{
+@Table
+public class Image {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
     private String description;
+
     private String dimensions;
 
     @ManyToOne
@@ -20,6 +25,14 @@ public class Image{
     public Image(String description, String dimensions) {
         this.description = description;
         this.dimensions = dimensions;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getDescription() {

@@ -1,31 +1,33 @@
 package com.driver.models;
 
-import org.springframework.boot.test.autoconfigure.data.cassandra.DataCassandraTest;
-
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name="blogs")
-
-public class Blog{
+@Table
+public class Blog {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String title;
+
     private String content;
+
     private Date pubDate;
+
     @ManyToOne
     @JoinColumn
     private User user;
 
-    @OneToMany(mappedBy = "blog",cascade = CascadeType.ALL)
-    private List<Image> listOfImage;
+    @OneToMany(mappedBy = "blog", cascade = CascadeType.ALL)
+    private List<Image> imageList;
+
     public Blog() {
     }
+
     public Blog(String title, String content, Date pubDate) {
         this.title = title;
         this.content = content;
@@ -72,11 +74,11 @@ public class Blog{
         this.user = user;
     }
 
-    public List<Image> getListOfImage() {
-        return listOfImage;
+    public List<Image> getImageList() {
+        return imageList;
     }
 
-    public void setListOfImage(List<Image> listOfImage) {
-        this.listOfImage = listOfImage;
+    public void setImageList(List<Image> imageList) {
+        this.imageList = imageList;
     }
 }

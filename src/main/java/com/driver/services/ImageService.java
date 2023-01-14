@@ -14,27 +14,30 @@ public class ImageService {
     @Autowired
     ImageRepository imageRepository2;
     @Autowired
-    BlogRepository blogRepository1;
+    private BlogRepository blogRepository1;
 
     public Image createAndReturn(Blog blog, String description, String dimensions){
-
         //create an image based on given parameters and add it to the imageList of given blog
-
         Image image = new Image(description, dimensions);
         image.setBlog(blog);
-        List<Image> imageList = blog.getListOfImage();
+        List<Image> imageList = blog.getImageList();
         if(imageList==null) imageList = new ArrayList<>();
         imageList.add(image);
-        blog.setListOfImage(imageList);
+        blog.setImageList(imageList);
         blogRepository1.save(blog);
         return image;
     }
 
     public void deleteImage(Image image){
+
+        //Blog blog = image.getBlog();
         imageRepository2.delete(image);
+//        blog.getImageList().remove(image);
+//        blogRepository.save(blog);
     }
 
     public Image findById(int id) {
+
         return imageRepository2.findById(id).get();
     }
 
